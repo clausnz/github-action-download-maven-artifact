@@ -2,7 +2,7 @@ import Base64 from 'base-64'
 import fetch from 'node-fetch'
 import fs from 'fs'
 import path from 'path'
-import { v4 as uuidv4 } from 'uuid'
+import {v4 as uuidv4} from 'uuid'
 
 export const downloadArtifact = (props) => {
     const {
@@ -52,8 +52,9 @@ const downloadFile = (url, options, filestream) => {
             .then(response => {
                 if (response.status < 400) {
                     response.body.pipe(filestream)
-                    filestream.on('finish', resolve)
-                    filestream.on('error', () => reject(new Error('Error downloading file.')))
+                    filestream
+                        .on('finish', resolve)
+                        .on('error', () => reject(new Error('Error downloading file.')))
                 } else {
                     reject(response.statusText)
                 }
@@ -63,7 +64,7 @@ const downloadFile = (url, options, filestream) => {
 }
 
 const createFile = async (filepath) => {
-    await fs.promises.mkdir(path.dirname(filepath), { recursive: true }).catch(console.error)
+    await fs.promises.mkdir(path.dirname(filepath), {recursive: true}).catch(console.error)
     return (new Promise((resolve, reject) => {
         const fileStream = fs.createWriteStream(filepath)
         fileStream
