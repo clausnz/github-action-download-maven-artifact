@@ -15,13 +15,9 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Set branch name
-        id: set-branch-name
-        run: echo "::set-output name=BRANCH_NAME::${GITHUB_REF#refs/heads/}"
-
       - name: Download Maven Artifact
         id: download-maven-artifact
-        uses: clausnz/github-action-download-maven-artifact@${{ steps.set-branch-name.outputs.BRANCH_NAME }}
+        uses: clausnz/github-action-download-maven-artifact@master
         with:
           url: 'https://repo1.maven.org'
           repository: 'maven2'
