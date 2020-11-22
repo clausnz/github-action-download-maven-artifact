@@ -45,7 +45,7 @@ outputs:
 
 runs:
   using: node12
-  main: dist/index.js
+  main: dist/dev.js
 
 branding:
   icon: package
